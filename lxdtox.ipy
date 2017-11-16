@@ -1,0 +1,23 @@
+#"""
+#* [ ] If there is no lxdtox container, create one
+#      from default OS (Ubuntu 16.04)
+#  * [ ] Install `tox`
+#  * [ ] Make `init` snapshot of the container for
+#        easy reverting
+#
+#* [x] start `lxdtox` if it is not started
+#
+#* [ ] Recursively copy current project (parent dir) to lxdtox
+#  * [ ] Detect removed files so that they won't
+#        appear remotely
+#
+#* [ ] Run `tox` in remote dir
+#"""
+
+# The output from the next command will be either
+# ["STOPPED"] or [""] (not exist)
+status = !lxc list lxdtox -c s --format csv
+
+if status == ["STOPPED"]:
+  !echo Starting lxdtox container
+  !lxc start lxdtox
