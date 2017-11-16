@@ -22,3 +22,8 @@ status = !lxc list lxdtox -c s --format csv
 if status == ["STOPPED"]:
   !echo Starting lxdtox container
   !lxc start lxdtox
+
+out = !basename `pwd`
+dirname = out.s
+!echo Pushing {dirname}/ to lxdtox
+!lxc file push -r ../{dirname} lxdtox/root/
