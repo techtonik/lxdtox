@@ -5,14 +5,14 @@
 #  * [ ] Install `tox`
 #  * [ ] Make `init` snapshot of the container for
 #        easy reverting
-#
+ 
   [x] start `lxdtox` if it is not started
-#
-#* [ ] Recursively copy current project (parent dir) to lxdtox
-#  * [ ] Detect removed files so that they won't
-#        appear remotely
-#
-#* [ ] Run `tox` in remote dir
+
+  [x] Recursively copy current project (parent dir) to lxdtox
+    [ ] Detect removed files so that they won't
+        appear remotely
+
+  [x] Run `tox` in remote dir
 """
 
 # The output from the next command will be either
@@ -27,3 +27,6 @@ out = !basename `pwd`
 dirname = out.s
 !echo Pushing {dirname}/ to lxdtox
 !lxc file push -r ../{dirname} lxdtox/root/
+
+!echo Running tox
+!lxc exec lxdtox -- bash -c "cd {dirname} && tox"
